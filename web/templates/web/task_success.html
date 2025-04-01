@@ -1,0 +1,11 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Тапсырыс қабылданды{% endblock %}
+
+{% block content %}
+<div class="card text-center">
+    <h1>Рахмет!</h1>
+    <p>Сіздің тапсырмаңыз қабылданды. Біз сізбен жақын арада хабарласамыз.</p>
+    <a href="{% url 'home' %}" class="btn btn-primary">Басты бетке оралу</a>
+</div>
+{% endblock %}

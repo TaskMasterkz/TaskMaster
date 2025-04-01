@@ -1,0 +1,11 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Басты бет{% endblock %}
+
+{% block content %}
+<div class="card text-center">
+    <h1>TaskMaster - Сіздің көмекшіңіз</h1>
+    <p>Біз туралы ақпарат және күнделікті жеңілдіктер.</p>
+    <a href="{% url 'submit_task' %}" class="btn btn-primary">Тапсырыс беру</a>
+</div>
+{% endblock %}

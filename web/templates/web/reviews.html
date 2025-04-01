@@ -1,0 +1,19 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Баға беру{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 class="text-center">Бізге баға беріңіз</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Баға (1-5):</label>
+        <input type="number" name="rating" class="input-field" min="1" max="5" required>
+
+        <label>Пікіріңіз:</label>
+        <textarea name="comment" class="input-field" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-primary">Жіберу</button>
+    </form>
+</div>
+{% endblock %}

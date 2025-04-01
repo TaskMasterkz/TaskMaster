@@ -1,0 +1,23 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Тапсырыс беру{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 class="text-center">Тапсырыс беру</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Аты-жөніңіз:</label>
+        {{ form.name }}
+
+        <label>Тапсырма сипаттамасы:</label>
+        {{ form.description }}
+
+        <label>Файл жүктеу:</label>
+        {{ form.file }}
+
+        <button type="submit" class="btn btn-primary">Жіберу</button>
+    </form>
+</div>
+{% endblock %}
