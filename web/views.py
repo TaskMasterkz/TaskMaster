@@ -1,6 +1,8 @@
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from .forms import TaskSubmissionForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def home(request):
     return render(request, 'web/home.html')
@@ -8,6 +10,7 @@ def home(request):
 def pricing(request):
     return render(request, 'web/pricing.html')
 
+@login_required
 def submit_task(request):
     if request.method == "POST":
         form = TaskSubmissionForm(request.POST, request.FILES)
@@ -35,12 +38,21 @@ def submit_task(request):
 
     return render(request, 'web/submit_task.html', {'form': form})
 
+@login_required
 def reviews(request):
     return render(request, 'web/reviews.html')
 
 def contact(request):
     return render(request, 'web/contact.html')
 
-
+@login_required
 def task_success(request):
     return render(request, 'web/task_success.html')
+
+@login_required
+def give_feedback(request):
+    if request.method == 'POST':
+        # Пікірді өңдеу логикасы
+        messages.success(request, "Рахмет! Бағаңыз қабылданды.")
+        return redirect('home')
+    return render(request, 'web/feedback.html')

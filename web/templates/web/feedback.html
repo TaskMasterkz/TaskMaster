@@ -1,0 +1,27 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Баға беру{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Бізге баға беріңіз</h2>
+    <p>Сіздің пікіріңіз біз үшін маңызды!</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="rating">Баға (1-ден 5-ке дейін):</label>
+        <select name="rating" id="rating" required>
+            <option value="5">⭐⭐⭐⭐⭐ (Өте жақсы)</option>
+            <option value="4">⭐⭐⭐⭐ (Жақсы)</option>
+            <option value="3">⭐⭐⭐ (Орташа)</option>
+            <option value="2">⭐⭐ (Төмен)</option>
+            <option value="1">⭐ (Нашар)</option>
+        </select>
+        
+        <label for="comment">Пікіріңіз:</label>
+        <textarea name="comment" id="comment" rows="4" required></textarea>
+        
+        <button type="submit" class="btn btn-primary">Жіберу</button>
+    </form>
+</div>
+{% endblock %}

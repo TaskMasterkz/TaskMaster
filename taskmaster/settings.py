@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/accounts/login/'  # Кіру бетінің URL-і
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'web',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -89,9 +92,10 @@ WSGI_APPLICATION = 'taskmaster.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
     }
 }
+
 
 
 # Password validation

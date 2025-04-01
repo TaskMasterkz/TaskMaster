@@ -14,9 +14,18 @@
     <div class="navbar">
         <a href="{% url 'home' %}">Басты бет</a>
         <a href="{% url 'pricing' %}">Баға парағы</a>
-        <a href="{% url 'submit_task' %}">Тапсырыс беру</a>
-        <a href="{% url 'reviews' %}">Баға беру</a>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'submit_task' %}">Тапсырма жіберу</a>
+        <a href="{% url 'give_feedback' %}">Баға беру</a>
         <a href="{% url 'contact' %}">Байланыс</a>
+        <a href="{% url 'logout' %}">Шығу ({{ user.username }})</a>
+
+        {% else %}
+        <a href="{% url 'login' %}">Кіру</a>
+        <a href="{% url 'register' %}">Тіркелу</a>
+        {% endif %}
+
     </div>
 
     <div class="container">

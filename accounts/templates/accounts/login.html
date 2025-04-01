@@ -1,0 +1,16 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Кіру{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Кіру</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Логин" class="input-field" required>
+        <input type="password" name="password" placeholder="Құпия сөз" class="input-field" required>
+        <button type="submit" class="btn btn-primary">Кіру</button>
+    </form>
+    <p>Аккаунтыңыз жоқ па? <a href="{% url 'register' %}">Тіркелу</a></p>
+</div>
+{% endblock %}
