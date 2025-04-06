@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: taskmaster-site
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn Task_Master.wsgi"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_SETTINGS_MODULE
+        value: Task_Master.settings
+    plan: free

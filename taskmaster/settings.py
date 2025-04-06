@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-ga9(1i_my#^=8l7@6$gs_770sskgiztu2q7ip=5c#nondm8y^_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com']
 
-LOGIN_URL = '/accounts/login/'  # Кіру бетінің URL-і
+LOGIN_URL = '/accounts/login/'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

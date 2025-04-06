@@ -3,9 +3,11 @@ from django.shortcuts import render, redirect
 from .forms import TaskSubmissionForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .models import Feedback
 
 def home(request):
-    return render(request, 'web/home.html')
+    feedbacks = Feedback.objects.order_by('-created_at')[:5]
+    return render(request, 'web/home.html', {'feedbacks': feedbacks})
 
 def pricing(request):
     return render(request, 'web/pricing.html')
@@ -52,7 +54,11 @@ def task_success(request):
 @login_required
 def give_feedback(request):
     if request.method == 'POST':
-        # Пікірді өңдеу логикасы
-        messages.success(request, "Рахмет! Бағаңыз қабылданды.")
-        return redirect('home')
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment')
+        if request.user.is_authenticated:
+            Feedback.objects.create(user=request.user, rating=rating, comment=comment)
+            return redirect('home')  # Немесе 'feedback_success'
+        else:
+            return redirect('login')
     return render(request, 'web/feedback.html')
