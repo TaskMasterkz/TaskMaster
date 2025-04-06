@@ -1,0 +1,200 @@
+/* Жалпы стильдер */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Навигация */
+.navbar {
+    background-color: #007bff;
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Контейнер */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Карточкалар */
+.card {
+    max-width: 500px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+       background-color: #fff;
+}
+
+
+/* Енгізу өрістері */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Түймелер */
+.btn {
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    display: block;
+    width: 95%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+/*
+    width: 80%;  Кішірек етіп, ортасына қою
+    max-width: 300px;  Өте үлкен болып кетпеуі үшін */
+
+
+
+/* Футерді экранның астына бекіту */
+.footer {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.contact-card {
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+}
+
+.contact-card h2 {
+    color: #222;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.contact-card p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center; /* Ортасына туралау */
+}
+
+.instagram { background-color: #E4405F; }
+.instagram:hover { background-color: #C13584; }
+
+.facebook { background-color: #1877F2; }
+.facebook:hover { background-color: #145DBF; }
+
+.telegram { background-color: #0088cc; }
+.telegram:hover { background-color: #0077b5; }
+
+.whatsapp { background-color: #25D366; }
+.whatsapp:hover { background-color: #1ebe57; }
+
+.email {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.email-icon {
+    width: 20px;
+    height: 20px;
+}
+
+
+.feedback-section {
+    background: #fefefe;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.feedback-section h3 {
+    text-align: center;
+    color: #333;
+}
+.feedback-section p {
+    font-size: 14px;
+    line-height: 1.4;
+}
