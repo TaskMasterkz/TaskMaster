@@ -62,3 +62,21 @@ def give_feedback(request):
         else:
             return redirect('login')
     return render(request, 'web/feedback.html')
+
+
+from graphviz import Digraph
+from django.http import HttpResponse
+
+def graph_view(request):
+    # Graphviz графикасын құру
+    dot = Digraph(comment='The Round Table')
+    dot.node('A', 'King Arthur')
+    dot.node('B', 'Lancelot')
+    dot.edge('A', 'B', 'Knows')
+
+    # Графикті PNG ретінде қайтару
+    response = HttpResponse(content_type='image/png')
+    response['Content-Disposition'] = 'inline; filename="graph.png"'
+    response.write(dot.pipe(format='png'))
+
+    return response
