@@ -11,5 +11,5 @@ urlpatterns = [
     path('task-success/', views.task_success, name='task_success'),
     path('feedback/', views.give_feedback, name='give_feedback'),
 
-    path('graph/', views.graph_view, name='graph_view'),
+    path('graph/', views.networkx_graph_view, name='networkx_graph'),
 ]

@@ -2,8 +2,12 @@ from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from .forms import TaskSubmissionForm
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from .models import Feedback
+import io
+import networkx as nx
+import matplotlib.pyplot as plt
+from django.http import HttpResponse
+
 
 def home(request):
     feedbacks = Feedback.objects.order_by('-created_at')[:5]
@@ -64,19 +68,19 @@ def give_feedback(request):
     return render(request, 'web/feedback.html')
 
 
-from graphviz import Digraph
-from django.http import HttpResponse
 
-def graph_view(request):
-    # Graphviz графикасын құру
-    dot = Digraph(comment='The Round Table')
-    dot.node('A', 'King Arthur')
-    dot.node('B', 'Lancelot')
-    dot.edge('A', 'B', 'Knows')
+def networkx_graph_view(request):
+    G = nx.DiGraph()
+    G.add_edge("A", "B")
+    G.add_edge("B", "C")
+    G.add_edge("C", "A")
 
-    # Графикті PNG ретінде қайтару
-    response = HttpResponse(content_type='image/png')
-    response['Content-Disposition'] = 'inline; filename="graph.png"'
-    response.write(dot.pipe(format='png'))
+    plt.figure(figsize=(5, 5))
+    nx.draw(G, with_labels=True, node_color='skyblue', node_size=2000, font_size=16, arrows=True)
 
-    return response
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close()
+    buf.seek(0)
+
+    return HttpResponse(buf.getvalue(), content_type='image/png')
