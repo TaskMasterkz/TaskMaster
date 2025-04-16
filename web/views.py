@@ -21,19 +21,18 @@ def submit_task(request):
     if request.method == "POST":
         form = TaskSubmissionForm(request.POST, request.FILES)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
-            file = request.FILES.get('file')  # Файлды аламыз
+            task = form.save(commit=False)  # Мәліметті сақтау үшін
+            task.user = request.user  # Тапсырманы кім жібергенін сақтау
+            task.save()  # Тапсырманы сақтап, файлды media/tasks/ ішіне сақтайды
 
             # Email мәліметтері
-            subject = f"Жаңа тапсырма: {name}"
-            message = f"Аты-жөні: {name}\n\nСипаттама:\n{description}"
-
+            subject = f"Жаңа тапсырма: {task.name}"
+            message = f"Аты-жөні: {task.name}\n\nСипаттама:\n{task.description}"
             email = EmailMessage(subject, message, 'your-email@example.com', ['your-email@example.com'])
 
             # Егер файл бар болса, хатқа тіркеу
-            if file:
-                email.attach(file.name, file.read(), file.content_type)
+            if task.file:
+                email.attach(task.file.name, task.file.read(), task.file.file.content_type)
 
             email.send()
 
@@ -43,6 +42,7 @@ def submit_task(request):
         form = TaskSubmissionForm()
 
     return render(request, 'web/submit_task.html', {'form': form})
+
 
 @login_required
 def reviews(request):

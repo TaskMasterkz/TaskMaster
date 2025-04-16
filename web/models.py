@@ -14,6 +14,7 @@ class Order(models.Model):
 
 # 1. Тапсырыстар кестесі
 class Task(models.Model):
+    name = models.CharField(max_length=255, default='No name')
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Пайдаланушы
     title = models.CharField(max_length=255)  # Тапсырыстың атауы
     description = models.TextField()  # Толық сипаттамасы
