@@ -7,6 +7,7 @@ import io
 import networkx as nx
 import matplotlib.pyplot as plt
 from django.http import HttpResponse
+import mimetypes
 
 
 def home(request):
@@ -16,32 +17,41 @@ def home(request):
 def pricing(request):
     return render(request, 'web/pricing.html')
 
+
 @login_required
 def submit_task(request):
     if request.method == "POST":
         form = TaskSubmissionForm(request.POST, request.FILES)
         if form.is_valid():
-            task = form.save(commit=False)  # Мәліметті сақтау үшін
-            task.user = request.user  # Тапсырманы кім жібергенін сақтау
-            task.save()  # Тапсырманы сақтап, файлды media/tasks/ ішіне сақтайды
+            task = form.save(commit=False)
+            task.user = request.user  # Пайдаланушыны байланыстыру
+            task.save()  # Task моделіне сақтау
 
             # Email мәліметтері
             subject = f"Жаңа тапсырма: {task.name}"
             message = f"Аты-жөні: {task.name}\n\nСипаттама:\n{task.description}"
-            email = EmailMessage(subject, message, 'your-email@example.com', ['your-email@example.com'])
 
-            # Егер файл бар болса, хатқа тіркеу
+            email = EmailMessage(
+                subject,
+                message,
+                'your-email@example.com',  # Жіберуші email
+                ['your-email@example.com'],  # Қабылдаушы email
+            )
+
             if task.file:
-                email.attach(task.file.name, task.file.read(), task.file.file.content_type)
+                mime_type, _ = mimetypes.guess_type(task.file.name)
+                task.file.open()  # Файлды оқу үшін ашу
+                email.attach(task.file.name, task.file.read(), mime_type or 'application/octet-stream')
+                task.file.close()  # Жабу міндетті
 
             email.send()
 
-            return redirect('task_success')  # Жіберілгеннен кейін басқа бетке бағыттау
-
+            return redirect('task_success')
     else:
         form = TaskSubmissionForm()
 
     return render(request, 'web/submit_task.html', {'form': form})
+
 
 
 @login_required
