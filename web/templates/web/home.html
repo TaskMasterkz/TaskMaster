@@ -3,9 +3,34 @@
 {% block title %}Басты бет{% endblock %}
 
 {% block content %}
-<div class="card text-center">
-    <h1>TaskMaster - Сіздің көмекшіңіз</h1>
-    <p>Біз туралы ақпарат және күнделікті жеңілдіктер.</p>
-    <a href="{% url 'submit_task' %}" class="btn btn-primary">Тапсырыс беру</a>
+<div class="main-container" style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+
+    <!-- Сол жақ бөлігі: ақпарат -->
+    <div class="info-section" style="flex: 1 1 60%; min-width: 300px;">
+        <h2>Біз туралы</h2>
+        <p style="font-size: 16px; line-height: 1.6;">
+            Біз студенттерге, оқушыларға және басқа да үй тапсырмаларын орындауға көмектесеміз. <br>
+            Күн сайын түрлі жеңілдіктер ұсынамыз! Қолданушылардың тапсырмаларын сапалы әрі уақтылы орындау — басты мақсатымыз.
+        </p>
+
+        <div class="discount-box" style="background: #f0fdf4; border-left: 5px solid #28a745; padding: 15px; margin-top: 20px; border-radius: 8px;">
+            <strong style="font-size: 16px;">🎉 Бүгінгі жеңілдік:</strong>
+            <p style="margin-top: 8px;">Бірінші тапсырысқа <strong>10%</strong> жеңілдік! <br> Қазір тапсырыс беріп, тиімді пайдаланыңыз.</p>
+        </div>
+    </div>
+
+    <!-- Оң жақ бөлігі: пікірлер -->
+    <div class="feedback-section" style="flex: 1 1 35%; min-width: 280px; max-height: 420px; overflow-y: auto; background: #f9f9f9; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <h3 style="text-align: center; margin-bottom: 15px;">🗣 Пайдаланушылар пікірі</h3>
+        {% for feedback in feedbacks %}
+            <div style="border-bottom: 1px solid #ddd; margin-bottom: 12px; padding-bottom: 10px;">
+                <p style="margin: 0;"><strong>{{ feedback.user.username }}</strong> → ⭐ {{ feedback.rating }}/5</p>
+                <p style="margin: 4px 0; font-size: 14px; color: #555;">{{ feedback.comment }}</p>
+            </div>
+        {% empty %}
+            <p style="text-align: center; color: #777;">Пікірлер әлі жоқ.</p>
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}

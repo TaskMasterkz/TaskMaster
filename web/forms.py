@@ -1,6 +1,16 @@
 from django import forms
+from .models import Task
 
-class TaskSubmissionForm(forms.Form):
-    name = forms.CharField(label="Аты-жөніңіз", max_length=100, widget=forms.TextInput(attrs={'class': 'input-field'}))
-    description = forms.CharField(label="Тапсырма сипаттамасы", widget=forms.Textarea(attrs={'class': 'input-field'}))
-    file = forms.FileField(label="Файл жүктеу", required=False)
+class TaskSubmissionForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['name', 'description', 'file']
+        labels = {
+            'name': 'Аты-жөніңіз',
+            'description': 'Тапсырма сипаттамасы',
+            'file': 'Файл жүктеу',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'input-field'}),
+            'description': forms.Textarea(attrs={'class': 'input-field'}),
+        }

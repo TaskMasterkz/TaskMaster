@@ -14,6 +14,7 @@ class Order(models.Model):
 
 # 1. Тапсырыстар кестесі
 class Task(models.Model):
+    name = models.CharField(max_length=255, default='No name')
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Пайдаланушы
     title = models.CharField(max_length=255)  # Тапсырыстың атауы
     description = models.TextField()  # Толық сипаттамасы
@@ -30,10 +31,11 @@ class Task(models.Model):
 
 # 2. Пайдаланушылардың бағалау кестесі
 class Feedback(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Кім бағалады
-    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])  # Баға (1-5)
-    comment = models.TextField(blank=True)  # Пікір
-    created_at = models.DateTimeField(auto_now_add=True)  # Қашан қалдырылды
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Пайдаланушы
+    rating = models.IntegerField()  # Баға (1-5)
+    comment = models.TextField()  # Пікір мәтіні
+    created_at = models.DateTimeField(auto_now_add=True)  # Автоматты түрде уақыты
 
     def __str__(self):
         return f"{self.user.username} - {self.rating}"
+

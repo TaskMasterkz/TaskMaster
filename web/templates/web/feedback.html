@@ -3,25 +3,31 @@
 {% block title %}Баға беру{% endblock %}
 
 {% block content %}
-<div class="card">
-    <h2>Бізге баға беріңіз</h2>
-    <p>Сіздің пікіріңіз біз үшін маңызды!</p>
-    
+<div class="card" style="max-width: 600px; margin: auto; padding: 20px;">
+    <h2 style="text-align: center;">📝 Бізге баға беріңіз</h2>
+    <p style="text-align: center;">Сіздің пікіріңіз біз үшін маңызды!</p>
+
     <form method="post">
         {% csrf_token %}
-        <label for="rating">Баға (1-ден 5-ке дейін):</label>
-        <select name="rating" id="rating" required>
-            <option value="5">⭐⭐⭐⭐⭐ (Өте жақсы)</option>
-            <option value="4">⭐⭐⭐⭐ (Жақсы)</option>
-            <option value="3">⭐⭐⭐ (Орташа)</option>
-            <option value="2">⭐⭐ (Төмен)</option>
-            <option value="1">⭐ (Нашар)</option>
-        </select>
-        
-        <label for="comment">Пікіріңіз:</label>
-        <textarea name="comment" id="comment" rows="4" required></textarea>
-        
-        <button type="submit" class="btn btn-primary">Жіберу</button>
+        <div style="margin-bottom: 15px;">
+            <label for="rating"><strong>Баға (1-ден 5-ке дейін):</strong></label>
+            <select name="rating" id="rating" required class="form-control">
+                <option value="5">⭐⭐⭐⭐⭐ (Өте жақсы)</option>
+                <option value="4">⭐⭐⭐⭐ (Жақсы)</option>
+                <option value="3">⭐⭐⭐ (Орташа)</option>
+                <option value="2">⭐⭐ (Төмен)</option>
+                <option value="1">⭐ (Нашар)</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="comment"><strong>Пікіріңіз:</strong></label>
+            <textarea name="comment" id="comment" rows="4" required class="form-control" placeholder="Мысалы: Керемет қызмет!"></textarea>
+        </div>
+
+        <div style="text-align: center;">
+            <button type="submit" class="btn btn-primary">📩 Жіберу</button>
+        </div>
     </form>
 </div>
 {% endblock %}
