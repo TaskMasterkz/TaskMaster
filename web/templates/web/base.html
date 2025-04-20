@@ -16,6 +16,7 @@
         <a href="{% url 'pricing' %}">Баға парағы</a>
 
         {% if user.is_authenticated %}
+        <a href="{% url 'my_tasks' %}">Менің тапсырмаларым</a>
         <a href="{% url 'submit_task' %}">Тапсырма жіберу</a>
         <a href="{% url 'give_feedback' %}">Баға беру</a>
         <a href="{% url 'contact' %}">Байланыс</a>
@@ -24,6 +25,7 @@
         {% else %}
         <a href="{% url 'login' %}">Кіру</a>
         <a href="{% url 'register' %}">Тіркелу</a>
+        <a href="{% url 'password_reset' %}">Құпиясөзді ұмыттыңыз ба?</a>
         {% endif %}
 
     </div>

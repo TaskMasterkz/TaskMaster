@@ -10,6 +10,7 @@ urlpatterns = [
     path('submit-task/', views.submit_task, name='submit_task'),
     path('task-success/', views.task_success, name='task_success'),
     path('feedback/', views.give_feedback, name='give_feedback'),
+    path('my-tasks/', views.my_tasks, name='my_tasks'),
 
     path('graph/', views.networkx_graph_view, name='networkx_graph'),
 ]

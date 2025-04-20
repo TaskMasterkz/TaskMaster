@@ -1,13 +1,16 @@
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
+from django.db.models import Q
+from django.core.paginator import Paginator
 from .forms import TaskSubmissionForm
 from django.contrib.auth.decorators import login_required
-from .models import Feedback
+from .models import Feedback, Task
 import io
 import networkx as nx
 import matplotlib.pyplot as plt
 from django.http import HttpResponse
 import mimetypes
+
 
 
 def home(request):
@@ -77,6 +80,24 @@ def give_feedback(request):
             return redirect('login')
     return render(request, 'web/feedback.html')
 
+
+@login_required
+def my_tasks(request):
+    query = request.GET.get('q', '')
+    sort = request.GET.get('sort', '-created_at')  # default: соңғы тапсырмалар
+
+    tasks = Task.objects.filter(user=request.user)
+
+    if query:
+        tasks = tasks.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
+    tasks = tasks.order_by(sort)
+
+    paginator = Paginator(tasks, 5)  # әр бетке 5 тапсырма
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'web/my_tasks.html', {'page_obj': page_obj, 'query': query, 'sort': sort})
 
 
 def networkx_graph_view(request):
