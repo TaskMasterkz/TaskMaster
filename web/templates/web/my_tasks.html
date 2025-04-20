@@ -11,10 +11,11 @@
         <input type="text" name="q" placeholder="Іздеу..." value="{{ request.GET.q }}" class="form-control" style="width: 250px;">
 
         <select name="sort" class="form-control">
-            <option value="-created_at" {% if request.GET.sort =="-created_at" %}selected{% endif %}>Соңғы тапсырмалар</option>
-            <option value="created_at" {% if request.GET.sort =="created_at" %}selected{% endif %}>Ескі тапсырмалар</option>
-            <option value="title" {% if request.GET.sort =="title" %}selected{% endif %}>Аты бойынша (А-Я)</option>
+            <option value="-created_at" {% if request.GET.sort == "-created_at" %}selected{% endif %}>Соңғы тапсырмалар</option>
+            <option value="created_at" {% if request.GET.sort == "created_at" %}selected{% endif %}>Ескі тапсырмалар</option>
+            <option value="title" {% if request.GET.sort == "title" %}selected{% endif %}>Аты бойынша (А-Я)</option>
         </select>
+
 
         <button type="submit" class="btn btn-primary">Қолдану</button>
     </form>
