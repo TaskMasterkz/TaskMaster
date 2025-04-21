@@ -3,26 +3,25 @@
 {% block title %}Менің тапсырмаларым{% endblock %}
 
 {% block content %}
-<div class="my-tasks-container">
+<div class="container my-tasks-container">
     <h2 class="my-tasks-header">📋 Менің тапсырмаларым</h2>
 
     <!-- 🔍 Іздеу және Сұрыптау -->
-    <form method="get" class="task-filter-sort" style="gap: 10px;">
-        <input type="text" name="q" placeholder="Іздеу..." value="{{ request.GET.q }}" class="form-control" style="width: 250px;">
+    <form method="get" class="task-filter-sort">
+        <input type="text" name="q" placeholder="Іздеу..." value="{{ request.GET.q }}" class="input-field" style="max-width: 250px;">
 
-        <select name="sort" class="form-control">
+        <select name="sort" class="input-field" style="max-width: 200px;">
             <option value="-created_at" {% if request.GET.sort == "-created_at" %}selected{% endif %}>Соңғы тапсырмалар</option>
             <option value="created_at" {% if request.GET.sort == "created_at" %}selected{% endif %}>Ескі тапсырмалар</option>
             <option value="title" {% if request.GET.sort == "title" %}selected{% endif %}>Аты бойынша (А-Я)</option>
         </select>
 
-
-        <button type="submit" class="btn btn-primary">Қолдану</button>
+        <button type="submit" class="btn">Қолдану</button>
     </form>
 
     <!-- 📌 Тапсырмалар тізімі -->
     {% for task in page_obj %}
-        <div class="task-item">
+        <div class="card task-item">
             <div class="card-body">
                 <h5 class="card-title">{{ task.title }}</h5>
                 <p class="card-text">{{ task.description }}</p>
@@ -34,32 +33,20 @@
     {% endfor %}
 
     <!-- 📄 Пагинация -->
-    <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1&q={{ request.GET.q }}&sort={{ request.GET.sort }}">⏮</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}&sort={{ request.GET.sort }}">⬅</a>
-                </li>
-            {% endif %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1&q={{ request.GET.q }}&sort={{ request.GET.sort }}">&laquo;</a>
+            <a href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}&sort={{ request.GET.sort }}">Алдыңғы</a>
+        {% endif %}
 
-            <li class="page-item active">
-                <span class="page-link">
-                    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-                </span>
-            </li>
+        <span class="current">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
 
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}&sort={{ request.GET.sort }}">➡</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&q={{ request.GET.q }}&sort={{ request.GET.sort }}">⏭</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}&sort={{ request.GET.sort }}">Келесі</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&q={{ request.GET.q }}&sort={{ request.GET.sort }}">&raquo;</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
